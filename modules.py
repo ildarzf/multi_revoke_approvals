@@ -3,6 +3,7 @@ from config import *
 from utils import *
 from sys import stderr
 import time
+import random
 
 from _abis.abis import *
 
@@ -16,16 +17,18 @@ logger.add(
 def check_allowance(
     private_key: str, network: str, token_address: str, contract_address: str
 ):
-    address = get_wallet(private_key)
+
 
     web3 = get_web3_by_network(network)
+
+    address = web3.to_checksum_address(get_wallet(private_key))
 
     token_contract = web3.eth.contract(
         address=web3.to_checksum_address(token_address), abi=ABI_ERC20
     )
 
     amount_approved = token_contract.functions.allowance(
-        address, contract_address
+        address, web3.to_checksum_address(contract_address)
     ).call()
 
     return token_contract, amount_approved
@@ -44,7 +47,7 @@ def log_allowance(
 
     if allowance_amount > 0:
         logger.warning(
-            f"{network} | {drainer_contract} сосет {token} ({token_address}) | макс: {allowance_amount}"
+            f"{network} | {drainer_contract} найден апрув {token} ({token_address}) | макс: {allowance_amount}"
         )
 
         if is_save:
@@ -65,7 +68,7 @@ def revoke_approve(
 
         if allowance_amount > 0:
             logger.warning(
-                f"{network} | {drainer_contract} sucking {token} ({token_address}) | max: {allowance_amount}"
+                f"{network} | {drainer_contract} найден апрув {token} ({token_address}) | max: {allowance_amount}"
             )
 
             while True:
@@ -93,11 +96,12 @@ def revoke_approve(
                     break
 
             if tx_status == 1:
-                logger.success(f"No more sucking | {tx_link}")
+                logger.success(f"Апрув снят | {tx_link}")
                 time.sleep(5)
             else:
                 logger.error(f"Fail | {tx_link}")
                 return
+            sleep_indicator(random.randint(SLEEP_REVOKE[0], SLEEP_REVOKE[1]))
 
     except Exception as error:
         logger.error(error)

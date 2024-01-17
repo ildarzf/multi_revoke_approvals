@@ -1,8 +1,36 @@
 from web3 import HTTPProvider, Web3
 
 from _abis.abis import *
+from loguru import logger
+import time
 from config import *
+from tqdm import tqdm
 
+
+def gas_price_chk():
+    web3 = Web3(HTTPProvider(DATA["ethereum"]["rpc"]))
+    while True:
+        if web3.is_connected():
+            break
+        else:
+            logger.info(f'Not connect to RPC')
+            time.sleep(5)
+    while True:
+        try:
+            current_gas_price = web3.eth.gas_price
+            current_gas_price_gwei = web3.from_wei(current_gas_price, 'gwei')
+            if round(current_gas_price_gwei, 1) <= Gwei:
+                break
+            else:
+                logger.info(f'GWEI {round(current_gas_price_gwei, 1)}  Ждем Gwei ниже {Gwei}. Сплю 30 секунд')
+                time.sleep(30)
+        except Exception as err:
+            logger.info(err)
+
+
+def sleep_indicator(sec):
+    for i in tqdm(range(sec), desc='Пауза', bar_format="{desc}: {n_fmt}c /{total_fmt}c {bar}", colour='green'):
+        time.sleep(1)
 
 def get_web3_by_network(network: str):
     return Web3(Web3.HTTPProvider(DATA[network]["rpc"]))
@@ -29,7 +57,7 @@ def check_status_tx(web3: object, tx_hash: str):
     while True:
         try:
             tx_status = web3.eth.wait_for_transaction_receipt(
-                tx_hash, timeout=7200
+                tx_hash, timeout=2000
             ).status
             return tx_status
         except Exception as e:

@@ -1,3 +1,9 @@
+Gwei = 40
+SHUFFLE_PRIVATE = True  # перемешать приватники
+SLEEP_WALL = [30, 60] # спим между кошельками
+SLEEP_REVOKE = [10, 30] # спим между кошельками в случае ревоука
+SLEEP_CHK_ALLOW = 0.2 # задержка между кошельками на наличие апрува
+
 TOKENS = {
     "ethereum": {
         "USDT": "0xdac17f958d2ee523a2206206994597c13d831ec7",
@@ -6,6 +12,7 @@ TOKENS = {
     "optimism": {
         "USDT": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
         "USDC": "0x7f5c764cbc14f9669b88837ca1490cca17c31607",
+          "OP": "0x4200000000000000000000000000000000000042",
     },
     "bsc": {
         "USDT": "0x55d398326f99059ff775485246999027b3197955",
@@ -20,20 +27,36 @@ TOKENS = {
         "USDT": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
         "USDC": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
         "USDC.e": "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8",
+        "ARB": "0x912CE59144191C1204E64559FE8253a0e49E6548",
     },
     "avalanche": {
         "USDT": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
         "USDC": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
         "USDC.e": "0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664",
     },
+    "zksync": {
+        "USDC": "0x3355df6d4c9c3035724fd0e3914de96a5a83aaf4",
+    },
+    "scroll": {
+        "USDT": "0xf55BEC9cafDbE8730f096Aa55dad6D22d44099Df",
+        "USDC": "0x06eFdBFf2a14a7c8E15944D1F4A48F9F95F663A4",
+    },
+    "base": {
+        "USDC": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    },
+
+
 }
 
 NEED_REVOKE_CONTRACTS = {
     "ethereum": [
         "0x32c85e56A82d66Fa3C13E7dF900682D63fcBAf89",
         "0x79cdFd7Bc46D577b95ed92bcdc8abAba1844Af0c",
+        "0x3a23f943181408eac424116af7b7790c94cb97a5",    #bungee hack 16/01/24
     ],
-    "optimism": ["0xFb1b9A97f1836173390D8bdEaF9004727311A8e1"],
+    "optimism": [
+        "0xFb1b9A97f1836173390D8bdEaF9004727311A8e1",
+    ],
     "bsc": [
         "0x375E05F6e12028e933ce598Ad1BEd7f1194aB071",
         "0x3Fff9A58676584bA28E8780366d7D9CEf0EB78ce",
@@ -50,6 +73,15 @@ NEED_REVOKE_CONTRACTS = {
         "0x43B4bf8758CAE65E6b8242D2669E0E5E20Ff693A",
         "0x45E817D12758aC37BC8DD3C71143c1bE75e3eD6F",
     ],
+    # "zksync": [
+    #     ""
+    # ],
+    # "scroll": [
+    #     "",
+    # ],
+    # "base": [
+    #     "",
+    # ],
 }
 
 # ===========================================================
@@ -101,6 +133,30 @@ DATA = {
         "rpc": "https://rpc.ankr.com/avalanche",
         "scan": "https://snowtrace.io/tx",
         "token": "AVAX",
+        "decimals": 6,
+    },
+    "zksync": {
+        "chain": "zkSync",
+        "chain_id": 324,
+        "rpc": "https://1rpc.io/zksync2-era",
+        "scan": "https://explorer.zksync.io/tx",
+        "token": "ETH",
+        "decimals": 6,
+    },
+    "scroll": {
+        "chain": "SCROLL",
+        "chain_id": 534352,
+        "rpc": "https://rpc.ankr.com/scroll",
+        "scan": "https://blockscout.scroll.io/tx",
+        "token": "ETH",
+        "decimals": 6,
+    },
+    "base": {
+        "chain": "BASE",
+        "chain_id": 8453,
+        "rpc": "https://1rpc.io/base",
+        "scan": "https://basescan.org/tx",
+        "token": "ETH",
         "decimals": 6,
     },
 }
