@@ -4,7 +4,7 @@
 
 Добавлена рандомизация, задержки исполнения, контроль газа и несколько сетей. Фиксы по коду.
 
-Работает с сетями: Ethereum, Bsc, Avalanche, Polygon, Arbitrum, Optimism, zkSync, Scroll, Base
+Работает с сетями: Ethereum, Bsc, Avalanche, Polygon, Arbitrum, Optimism, zkSync, Scroll, Base, Fantom
 
 Тестировал на  python 3.10
 
