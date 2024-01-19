@@ -1,9 +1,9 @@
 Gwei = 40
 SHUFFLE_PRIVATE = True  # перемешать приватники
-SLEEP_WALL = [30, 60] # спим между кошельками
-SLEEP_REVOKE = [10, 30] # спим между кошельками в случае ревоука
+SLEEP_WALL = [400, 1000] # спим между кошельками
+SLEEP_REVOKE = [20, 50] # спим между кошельками в случае ревоука
 SLEEP_CHK_ALLOW = 0.2 # задержка между кошельками на наличие апрува
-
+UNLIM = 1000000 # смотрим и отменяем только контракты с апрувом выше 10 баксов USDC
 TOKENS = {
     "ethereum": {
         "USDT": "0xdac17f958d2ee523a2206206994597c13d831ec7",
@@ -44,43 +44,48 @@ TOKENS = {
     "base": {
         "USDC": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
     },
+    "fantom": {
+        "USDC": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+    },
 
 
 }
 
 NEED_REVOKE_CONTRACTS = {
     "ethereum": [
-        "0x32c85e56A82d66Fa3C13E7dF900682D63fcBAf89",
-        "0x79cdFd7Bc46D577b95ed92bcdc8abAba1844Af0c",
-        "0x3a23f943181408eac424116af7b7790c94cb97a5",    #bungee hack 16/01/24
+        "0x8731d54E9D02c286767d56ac03e8037C07e01e98",    #bungee hack 16/01/24
     ],
     "optimism": [
-        "0xFb1b9A97f1836173390D8bdEaF9004727311A8e1",
+        "0xB0D502E938ed5f4df2E681fE6E419ff29631d62b",
+        "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+        "0x5130f6cE257B8F9bF7fac0A0b519Bd588120ed40",
     ],
     "bsc": [
-        "0x375E05F6e12028e933ce598Ad1BEd7f1194aB071",
-        "0x3Fff9A58676584bA28E8780366d7D9CEf0EB78ce",
+        "0x4a364f8c717cAAD9A442737Eb7b8A55cc6cf18D8",
+        "0x1a1ec25DC08e98e5E93F1104B5e5cdD298707d31",
+        "0xb278163B1D2Da632D51190001BBb95d45C3b191a",
     ],
     "polygon": [
-        "0xACfaAa9Da11e66a8Cc8AF8E3D844673968FFf63f",
+        "0x45A01E4e04F14f7A4a6702c74187c5F6222033cd",
         "0x8Ee11bBD4139989e5F8BB92E8a9E01BC08DF3011",
     ],
     "arbitrum": [
-        "0x36c543B8bb76b330ecB66A13c1C1377f889f1919",
-        "0x6fcE1a7c3347E78D22C278eB3a5c72Ec8FcEa294",
+        "0x53Bf833A5d6c4ddA888F69c22C88C9f356a41614",
     ],
     "avalanche": [
-        "0x43B4bf8758CAE65E6b8242D2669E0E5E20Ff693A",
-        "0x45E817D12758aC37BC8DD3C71143c1bE75e3eD6F",
+        "0x45A01E4e04F14f7A4a6702c74187c5F6222033cd",
     ],
-    # "zksync": [
-    #     ""
-    # ],
+    "fantom": [
+        "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6",
+    ],
+    "zksync": [
+        "0xbE7D1FD1f6748bbDefC4fbaCafBb11C6Fc506d1d"
+    ],
     # "scroll": [
     #     "",
     # ],
     # "base": [
-    #     "",
+    #     "0x45f1A95A4D3f3836523F5c83673c797f4d4d263B",
     # ],
 }
 
@@ -133,6 +138,14 @@ DATA = {
         "rpc": "https://rpc.ankr.com/avalanche",
         "scan": "https://snowtrace.io/tx",
         "token": "AVAX",
+        "decimals": 6,
+    },
+    "fantom": {
+        "chain": "FTM",
+        "chain_id": 250,
+        "rpc": "https://rpc.ankr.com/fantom",
+        "scan": "https://ftmscan.com/tx",
+        "token": "FTM",
         "decimals": 6,
     },
     "zksync": {

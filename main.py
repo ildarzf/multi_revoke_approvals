@@ -20,11 +20,20 @@ if __name__ == "__main__":
         if SHUFFLE_PRIVATE:
             random.shuffle(PRIVATE_KEYS)
 
+
         for private_key in PRIVATE_KEYS:
             address = get_wallet(private_key)
             logger.info(address)
-            for network in NEED_REVOKE_CONTRACTS:
+            blockchains_revoke = list(NEED_REVOKE_CONTRACTS.keys())
+            random.shuffle(blockchains_revoke)                  # рандом сетей
+
+            for network in blockchains_revoke:
+                random.shuffle(NEED_REVOKE_CONTRACTS[network])  # перемешивание контрактов в одной сети
+
                 for drainer_contract in NEED_REVOKE_CONTRACTS[network]:
+                    tokens_revoke = list(TOKENS[network].keys()) # рандом токенов
+                    random.shuffle(tokens_revoke)
+
                     for token in TOKENS[network]:
                         if picked_func == "1":
                             try:

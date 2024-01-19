@@ -45,7 +45,7 @@ def log_allowance(
         private_key, network, token_address, drainer_contract
     )
 
-    if allowance_amount > 0:
+    if allowance_amount > UNLIM:
         logger.warning(
             f"{network} | {drainer_contract} найден апрув {token} ({token_address}) | макс: {allowance_amount}"
         )
@@ -66,7 +66,7 @@ def revoke_approve(
             private_key, network, token_address, drainer_contract
         )
 
-        if allowance_amount > 0:
+        if allowance_amount > UNLIM:
             logger.warning(
                 f"{network} | {drainer_contract} найден апрув {token} ({token_address}) | max: {allowance_amount}"
             )
